@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://skills-network-assets.s3.us.cloud-object-storage.appdomain.cloud/styles/sn.css">
   </head>
   <body>
-    <img src="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DB0201EN-SkillsNetwork/labs/Module%204/images/IDSNlogo.png" width="200" height="200"><br><br><br>
-    <h1>Hands-on Lab 5: Practice Aggregate, Scalar, String, Date and Time Functions</h1>
+    <img src="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DB0201EN-SkillsNetwork/labs/Labs_Coursera_V5/labs/Lab%20-%20Built-in%20functions%20/images/IDSNlogo.png" width="200" height="200"><br><br><br>
+    <h1>Hands-on Lab: Built-in functions - Aggregate, Scalar, String, Date and Time Functions</h1>
     <p>Now let’s practice using sub-queries and working with multiple tables. Use the PETRESCUE-CREATE.sql file provided to create the table and execute the queries in the last two videos.</p>
     <table>
       <thead>
@@ -98,7 +98,7 @@
     <p>Rather than create the table manually by typing the DDL commands in the SQL editor, you will execute a script containing the create table command.</p>
     <ol>
       <li>
-        <p>Download the script file <a href="scripts/PETRESCUE-CREATE.sql">PETRESCUE-CREATE.sql</a><br><strong>Note</strong>: To download, just right-click on the link above and click on <strong>Save As..</strong> or <strong>Save Link As...</strong> depending on your browser. Save the file as a .sql file and not HTML. (If you have issues downloading, you can download the <a href="scripts/PETRESCUE-CREATE.txt">text version of this file</a> instead.</p>
+        <p>Download the script file <a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DB0201EN-SkillsNetwork/labs/Labs_Coursera_V5/datasets/PETSALE_PETRESCUE/PETRESCUE-CREATE.sql" target="_blank" rel="external">PETRESCUE-CREATE.sql</a><br><strong>Note</strong>: To download, just right-click on the link above and click on <strong>Save As..</strong> or <strong>Save Link As...</strong> depending on your browser. Save the file as a .sql file and not HTML.</p>
       </li>
       <li>
         <p>Login to IBM Cloud and go to the Resources Dashboard: <a href="https://cloud.ibm.com/resources?cm_mmc=Email_Newsletter-_-Developer_Ed%2BTech-_-WW_WW-_-SkillsNetwork-Courses-IBMDeveloperSkillsNetwork-DB0201EN-SkillsNetwork-20127838&#x26;cm_mmca1=000026UJ&#x26;cm_mmca2=10006555&#x26;cm_mmca3=M12345678&#x26;cvosrc=email.Newsletter.M12345678&#x26;cvo_campaign=000026UJ" target="_blank" rel="external">https://cloud.ibm.com/resources</a> where you can find the Db2 service that you created in a previous Lab. Click on the <strong>Db2-xx</strong> service. Next, open the Db2 Console by clicking on <strong>Open Console</strong> button. Go to the <strong>Run SQL</strong> page. The Run SQL tool enables you to run DDL and SQL statements.</p>
@@ -144,9 +144,10 @@
     <p><strong>Query B5:</strong> Enter a query that displays all the columns from the PETRESCUE table, where the animal(s) rescued are cats. Use <strong>cat</strong> in lower case in the query.</p>
     <h1>Exercise 4: Date and Time Functions</h1>
     <p><strong>Query C1:</strong> Enter a function that displays the day of the month when cats have been rescued.</p>
-    <p><strong>Query C2:</strong> Enter a function that displays the number of rescues on the 5<sup>th</sup> day of the month.</p>
-    <p><strong>Query C3:</strong> Animals rescued should see the vet within three days of arrivals. Enter a function that displays the third day from each rescue.</p>
-    <p><strong>Query C4:</strong> Enter a function that displays the length of time the animals have been rescued; the difference between today’s date and the rescue date.</p>
+    <p><strong>Query C2:</strong> Enter a function that displays the number of rescues on the 5<sup>th</sup> month.</p>
+    <p><strong>Query C3:</strong> Enter a function that displays the number of rescues on the 14<sup>th</sup> day of the month.</p>
+    <p><strong>Query C4:</strong> Animals rescued should see the vet within three days of arrivals. Enter a function that displays the third day from each rescue.</p>
+    <p><strong>Query C5:</strong> Enter a function that displays the length of time the animals have been rescued; the difference between today’s date and the rescue date.</p>
     <h1>Lab Solutions</h1>
     <h1>Exercise 2 Solutions: Aggregate Functions</h1>
     <p><strong>Query A1:</strong> Enter a function that calculates the total cost of all animal rescues in the PETRESCUE table.</p>
@@ -173,11 +174,13 @@
     <h1>Exercise 4 Solutions: Date and Time Functions</h1>
     <p><strong>Query C1:</strong> Enter a function that displays the day of the month when cats have been rescued.</p>
     <p><code>select DAY(RESCUEDATE) from PETRESCUE where ANIMAL = 'Cat';</code></p>
-    <p><strong>Query C2:</strong> Enter a function that displays the number of rescues on the 5<sup>th</sup> day of the month.</p>
-    <p><code>select COUNT(*) from PETRESCUE where MONTH(RESCUEDATE)='05';</code></p>
-    <p><strong>Query C3:</strong> Animals rescued should see the vet within three days of arrivals. Enter a function that displays the third day from each rescue.</p>
+    <p><strong>Query C2:</strong> Enter a function that displays the number of rescues on the 5<sup>th</sup> month.</p>
+    <p><code>select SUM(QUANTITY) from PETRESCUE where MONTH(RESCUEDATE)='05';</code></p>
+    <p><strong>Query C3:</strong> Enter a function that displays the number of rescues on the 14<sup>th</sup> day of the month.</p>
+    <p><code>select SUM(QUANTITY) from PETRESCUE where DAY(RESCUEDATE)='14';</code></p>
+    <p><strong>Query C4:</strong> Animals rescued should see the vet within three days of arrivals. Enter a function that displays the third day from each rescue.</p>
     <p><code>select (RESCUEDATE + 3 DAYS) from PETRESCUE;</code></p>
-    <p><strong>Query C4:</strong> Enter a function that displays the length of time the animals have been rescued; the difference between today’s date and the recue date.</p>
+    <p><strong>Query C5:</strong> Enter a function that displays the length of time the animals have been rescued; the difference between today’s date and the recue date.</p>
     <p><code>select (CURRENT DATE - RESCUEDATE) from PETRESCUE;</code></p>
     <h1>Summary</h1>
     <p>You can now compose and run queries, check results and view the logs. You will use these skills in later labs.</p>
@@ -194,12 +197,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>2020-08-29</td>
-          <td>2.0</td>
-          <td>Lavanya</td>
-          <td>Reorganized the folders according to Modules</td>
-        </tr>
         <tr>
           <td>2020-06-29</td>
           <td>1.3</td>
@@ -223,18 +220,6 @@
           <td>1.0</td>
           <td>Rose Malcolm</td>
           <td>Initial version created</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
       </tbody>
     </table>
