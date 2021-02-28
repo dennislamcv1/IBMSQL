@@ -2,11 +2,12 @@
 drop table PETRESCUE;
 -- Create the PETRESCUE table 
 create table PETRESCUE (
-	ID INTEGER PRIMARY KEY NOT NULL,
+	ID INTEGER NOT NULL,
 	ANIMAL VARCHAR(20),
 	QUANTITY INTEGER,
 	COST DECIMAL(6,2),
-	RESCUEDATE DATE
+	RESCUEDATE DATE,
+	PRIMARY KEY (ID)
 	);
 -- Insert sample data into PETRESCUE table
 insert into PETRESCUE values 
